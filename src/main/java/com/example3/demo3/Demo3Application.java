@@ -21,7 +21,7 @@ public class Demo3Application {
 
     @RequestMapping("/")
     String home(){
-        return "Drinks Shop<br>/menu to browse menu.<br>/menu/{id} to view menu(0-3).<br>/menu/{id}/add to add menu to cart(0-3).<br>/checkout to checkout.<br>/clear to clear cart.<br>/cart to view cart.";
+        return "Drinks Shop<br>/menu to browse menu.<br>/menu/{id} to view menu(0-5).<br>/menu/{id}/add to add menu to cart(0-5).<br>/checkout to checkout.<br>/clear to clear cart.<br>/cart to view cart.";
     }
 
     @RequestMapping("/menu")
