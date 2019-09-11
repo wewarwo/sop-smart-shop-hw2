@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+import static com.example3.demo3.DrinkFactory.*;
+
 @RestController
 @SpringBootApplication
 public class Demo3Application {
@@ -16,35 +18,35 @@ public class Demo3Application {
         SpringApplication.run(Demo3Application.class, args);
     }
     public SingletonCart cart = SingletonCart.getInstance();
-    public int cost = 0;
 
     @RequestMapping("/")
     String home(){
-        return "Drinks Shop<br>/menu to browse menu.<br>/menu/{id} to view menu.<br>/menu/{id}/add to add menu to cart.<br>/checkout to checkout.<br>/clear to clear cart.<br>/cart to view cart.";
+        return "Drinks Shop<br>/menu to browse menu.<br>/menu/{id} to view menu(0-3).<br>/menu/{id}/add to add menu to cart(0-3).<br>/checkout to checkout.<br>/clear to clear cart.<br>/cart to view cart.";
     }
 
     @RequestMapping("/menu")
-    DrinkMenu[] viewMenuList(){
-        return DrinkMenuFactory.getDrinkMenuList();
+    DrinkInterface[] viewMenuList(){
+        return DrinkFactory.getDrinksMenuList();
     }
 
     @RequestMapping("/cart")
-    ArrayList<DrinkMenu> viewcart(){
+    ArrayList<DrinkInterface> viewcart(){
         return cart.getAll();
     }
 
     @RequestMapping("/menu/{id}")
-    DrinkMenu viewMenu(@PathVariable int id){
-        return DrinkMenuFactory.getDrinkMenu(id);
+    DrinkInterface viewMenu(@PathVariable int id){
+        return DrinkFactory.getDrinksMenu(id);
     }
 
     @RequestMapping({"/menu/{id}/add"})
     String addToCart(@PathVariable int id) {
         if (cart.add(id)) {
-            return DrinkMenuFactory.getDrinkMenu(id).getName() + " is added successfully.";
+            return DrinkFactory.getDrinksMenu(id).getName() + " is added successfully.";
         } else {
             return "menu is unavailable";
         }
+
     }
 
     @RequestMapping({"/clear"})
@@ -56,9 +58,9 @@ public class Demo3Application {
     @RequestMapping({"/checkout"})
     String checkout() {
         int total = 0;
-        for (DrinkMenu c:
+        for (DrinkInterface c:
                 cart.getAll()) {
-            total += c.getPrice();
+            total += c.getPrcie();
         }
         cart.clear();
         return "Total: " + total + " baht\nThank you...";

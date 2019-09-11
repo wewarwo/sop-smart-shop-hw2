@@ -1,6 +1,0 @@
-Cola
-Sprite
-Orange juice
-Grape juice
-M150
-RedBull
