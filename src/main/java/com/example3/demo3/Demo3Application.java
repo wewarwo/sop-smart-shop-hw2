@@ -20,12 +20,17 @@ public class Demo3Application {
 
     @RequestMapping("/")
     String home(){
-        return "Drinks Shop<br>/menu to browse menu.<br>/menu/{id} to view menu.<br>/menu/{id}/add to add menu to cart.<br>/checkout to checkout.<br>/clear to clear cart.";
+        return "Drinks Shop<br>/menu to browse menu.<br>/menu/{id} to view menu.<br>/menu/{id}/add to add menu to cart.<br>/checkout to checkout.<br>/clear to clear cart.<br>/cart to view cart.";
     }
 
     @RequestMapping("/menu")
     DrinkMenu[] viewMenuList(){
         return DrinkMenuFactory.getDrinkMenuList();
+    }
+
+    @RequestMapping("/cart")
+    ArrayList<DrinkMenu> viewcart(){
+        return cart.getAll();
     }
 
     @RequestMapping("/menu/{id}")
